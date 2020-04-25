@@ -24,6 +24,6 @@ jobs:
     - name: Install dependencies
       run: dotnet restore backend/ILSpy-server.sln
     - name: Build
-      run: dotnet msbuild backend/ILSpy-server.sln --configuration Release --no-restore
+      run: dotnet msbuild backend/ILSpy-server.sln
     - name: Test
       run: dotnet test backend\test\ILSpy.Host.Tests\ILSpy.Host.Tests.csproj --no-restore --verbosity normal
