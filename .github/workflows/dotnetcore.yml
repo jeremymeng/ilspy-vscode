@@ -17,15 +17,13 @@ jobs:
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 3.1.101
-    - name: Change directory to backend
-      run: pushd backend
+    - name: submodule init
+      run: git submodule init
+    - name: submodule update
+      run: git submodule update
     - name: Install dependencies
-      run: dotnet restore
+      run: dotnet restore backend/ILSpy-server.sln
     - name: Build
-      run: dotnet msbuild --configuration Release --no-restore
-    - name: Change directory to root
-      run: popd
-    - name: Change directory to backend tests
-      run: pushd backend\test\ILSpy.Host.Tests
+      run: dotnet msbuild backend/ILSpy-server.sln --configuration Release --no-restore
     - name: Test
-      run: dotnet test --no-restore --verbosity normal
+      run: dotnet test backend\test\ILSpy.Host.Tests\ILSpy.Host.Tests.csproj --no-restore --verbosity normal
