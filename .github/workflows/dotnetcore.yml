@@ -56,5 +56,5 @@ jobs:
         vsce package -o ${{ env.VSIX_FILENAME }}
     - uses: actions/upload-artifact@v1
       with:
-        name: '${{ env.VSIX_FILENAME }}
+        name: '${{ env.VSIX_FILENAME }}'
         path: 'vscode-extension/${{ env.VSIX_FILENAME }}'
