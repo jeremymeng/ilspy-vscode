@@ -46,7 +46,7 @@ jobs:
       run: npm i vsce -g
     - name: Set vsix file name
       env:
-        FILENAME: 'ilspy-vscode-${{env.GITHUB_RUN_NUMBER}}.vsix'
+        FILENAME: 'ilspy-vscode-${{github.run_id}}.vsix'
       run: |
         echo $FILENAME
         echo "::set-env name=VSIX_FILENAME::$FILENAME"
