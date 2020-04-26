@@ -48,5 +48,5 @@ jobs:
       run: cd vscode-extension && vsce package -o ilspy-vscode-%GITHUB_RUN_NUMBER%.vsix 
     - uses: actions/upload-artifact@v1
       with:
-        name: ilspy-vscode-%GITHUB_RUN_NUMBER%.vsix
-        path: vscode-extension/ilspy-vscode-%GITHUB_RUN_NUMBER%.vsix
+        name: ${{ format('ilspy-vscode-{0}.vsix', env.GITHUB_RUN_NUMBER) }}
+        path: ${{ format('vscode-extension/ilspy-vscode-{0}.vsix', env.GITHUB_RUN_NUMBER) }}
