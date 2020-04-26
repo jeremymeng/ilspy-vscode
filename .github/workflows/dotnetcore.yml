@@ -30,9 +30,6 @@ jobs:
     - name: Test backend
       run: dotnet test backend\test\ILSpy.Host.Tests\ILSpy.Host.Tests.csproj --no-restore --verbosity normal
       continue-on-error: true
-    - name: Clean up
-      run: rmdir vscode-extension\bin\ilspy-host /s /q
-      shell: cmd
     - name: Publish backend ILSpy.Host
       run: dotnet publish backend/src/ILSpy.Host/ILSpy.Host.csproj -f net472 -c release -r win7-x64 -o  ..\..\..\vscode-extension\bin\ilspy-host
     - name: Use Node.js
