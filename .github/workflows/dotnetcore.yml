@@ -49,16 +49,12 @@ jobs:
         FILENAME: 'ilspy-vscode-${{github.run_id}}.vsix'
       run: |
         echo $FILENAME
-        echo "::set-env name=VSIX_FILENAME::$FILENAME"
+        echo "::set-env name=VSIX_FILENAME::${{ env.FILENAME }}"
     - name: Pack extension
-      env:
-        VSIX_FILENAME: ${{ env.VSIX_FILENAME }}
       run: |
         cd vscode-extension
         echo vsce package -o "$VSIX_FILENAME"
     - uses: actions/upload-artifact@v1
-      env:
-        VSIX_FILENAME: ${{ env.VSIX_FILENAME }}
       with:
         name: $VSIX_FILENAME
         path: 'vscode-extension/${{ env.VSIX_FILENAME }}'
