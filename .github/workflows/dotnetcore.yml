@@ -44,11 +44,13 @@ jobs:
       run: cd vscode-extension && npm test
     - name: Install vsce
       run: npm i vsce -g
-    - name: Pack extension
+    - name: Set vsix file name
       env:
-        VSIX-FILENAME: ${{ format('ilspy-vscode-{0}.vsix', env.GITHUB_RUN_NUMBER) }}
-      run: cd vscode-extension && vsce package -o $VSIX-FILENAME
+        FILENAME: 'ilspy-vscode-${{env.GITHUB_RUN_NUMBER}}.vsix'
+      run: echo "::set-env name=VSIX_FILENAME::$FILENAME"
+    - name: Pack extension
+      run: cd vscode-extension && vsce package -o $VSIX_FILENAME
     - uses: actions/upload-artifact@v1
       with:
-        name: $VSIX-FILENAME
-        path: ${{ format('vscode-extension/{0}', env.VSIX-FILENAME) }}
+        name: $VSIX_FILENAME
+        path: 'vscode-extension/${{ env.VSIX_FILENAME }}'
