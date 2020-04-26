@@ -31,28 +31,25 @@ jobs:
       run: dotnet test backend\test\ILSpy.Host.Tests\ILSpy.Host.Tests.csproj --no-restore --verbosity normal
       continue-on-error: true
     - name: Publish backend ILSpy.Host
-      run: dotnet publish backend/src/ILSpy.Host/ILSpy.Host.csproj -f net472 -c release -r win7-x64 -o  ..\..\..\vscode-extension\bin\ilspy-host
+      run: dotnet publish backend/src/ILSpy.Host/ILSpy.Host.csproj -f net472 -c release -r win7-x64 -o  vscode-extension\bin\ilspy-host
     - name: Use Node.js
       uses: actions/setup-node@v1
       with:
         node-version: '12.x'
-    - name: Change Dir to vscode-extension
-      run: pushd vscode-extension
-      shell: cmd
     - name: Install extension dependencies
-      run: npm install
+      run: cd vscode-extension && npm install
     - name: Compile extension
-      run: npm run compile
+      run: cd vscode-extension && npm run compile
     - name: Test extension
-      run: npm test
+      run: cd vscode-extension && npm test
     - name: Install vsce
       run: npm i vsce -g
     - name: Pack extension
-      run: vsce package -o ilspy-vscode-%GITHUB_RUN_NUMBER%.vsix 
+      run: cd vscode-extension && vsce package -o ilspy-vscode-%GITHUB_RUN_NUMBER%.vsix 
     - uses: actions/upload-artifact@v1
       with:
         name: extension-vsix
-        path: ilspy-vscode-%GITHUB_RUN_NUMBER%.vsix
+        path: vscode-extension/ilspy-vscode-%GITHUB_RUN_NUMBER%.vsix
     - name: Resotre directory
       run: popd
       shell: cmd
