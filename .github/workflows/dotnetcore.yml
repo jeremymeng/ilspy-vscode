@@ -48,8 +48,5 @@ jobs:
       run: cd vscode-extension && vsce package -o ilspy-vscode-%GITHUB_RUN_NUMBER%.vsix 
     - uses: actions/upload-artifact@v1
       with:
-        name: extension-vsix
+        name: ilspy-vscode-%GITHUB_RUN_NUMBER%.vsix
         path: vscode-extension/ilspy-vscode-%GITHUB_RUN_NUMBER%.vsix
-    - name: Resotre directory
-      run: popd
-      shell: cmd
